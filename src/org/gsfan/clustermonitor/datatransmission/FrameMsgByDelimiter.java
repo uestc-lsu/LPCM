@@ -8,12 +8,10 @@ import java.io.OutputStream;
 
 public class FrameMsgByDelimiter implements MessageFramer{
 	
-//	private DataInputStream input = null;
 	private InputStream input = null;
 	private static final byte DELIMITER = '\n';
 	
 	public FrameMsgByDelimiter(InputStream input) {
-//		this.input = new DataInputStream(input);
 		this.input = input;
 	}
 	

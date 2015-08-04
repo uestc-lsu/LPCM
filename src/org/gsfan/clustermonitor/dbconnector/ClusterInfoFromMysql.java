@@ -12,22 +12,29 @@ public class ClusterInfoFromMysql {
 	private int clusterCount = 0;
 	private MysqlConnector connector = null;
 	
-	public ClusterInfoFromMysql(){
-
-		String sql = "select * from cluster ";
+	public ClusterInfoFromMysql() {
+		
+		this.getClusterFromClusterTable();
+		
+	}
+	
+	private void getClusterFromClusterTable() {
+		String sql = "select * from clusters ";
 		try {
-			this.connector = new MysqlConnector();
+			this.connector = MysqlConnector.getInstance();
 			Connection connection = connector.getConnection();
 			//创建指针可以自由移动的结果集
 			PreparedStatement preStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet resultSet = preStatement.executeQuery();
-			
 			while(resultSet.next()) {
-//				before change database
-//				clusters.put(resultSet.getString(2), resultSet.getString(3));
-//				after change database 
-				clusters.put(resultSet.getString(1), resultSet.getString(2));
+				//Hashtable中，key和value都不允许出现null值。
 				this.clusterCount++;
+				if(resultSet.getString(2)==null) {
+					clusters.put(resultSet.getString(1), "Unknow");
+//					continue;
+				} else {
+					clusters.put(resultSet.getString(1), resultSet.getString(2));					
+				}
 			}
 
 		} catch (SQLException e) {
@@ -35,27 +42,6 @@ public class ClusterInfoFromMysql {
 		}
 	}
 	
-/*
- 	public ClusterInfoFromMysql(String clusterName){
-
-		String sql = "select * from cluster " + clusterName;
-		try {
-			this.connector = new MysqlConnector();
-			Connection connection = connector.getConnection();
-			//创建指针可以自由移动的结果集
-			PreparedStatement preStatement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet resultSet = preStatement.executeQuery();
-			
-			while(resultSet.next()) {
-				clusters.put(resultSet.getString(2), resultSet.getString(3));
-				this.clusterCount++;
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
- * */
 	public Hashtable<String,String> getClusters(){
 		return this.clusters;
 	}
@@ -65,7 +51,7 @@ public class ClusterInfoFromMysql {
 	
 	public Hashtable<String,String> getClusterHosts(String clusterName){
 		Hashtable<String,String> hosts = new Hashtable<String,String>();
-		String sql = "select * from host where cluster_name = ?" ;
+		String sql = "select * from hosts where cluster_name = ?" ;
 		try {
 			Connection connection = connector.getConnection();
 			//创建指针可以自由移动的结果集
@@ -78,9 +64,6 @@ public class ClusterInfoFromMysql {
 				return null;
 			}
 			while(resultSet.next()) {	
-//				Before change database
-//				hosts.put(resultSet.getString(2), resultSet.getString(3));
-//				After change database
 				hosts.put(resultSet.getString(1), resultSet.getString(2));
 			}
 

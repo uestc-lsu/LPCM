@@ -1,0 +1,4 @@
+½¨¿â£ºmysql -uroot -p123456 < G:\InnovationProject\Source\conf\clustermonitor.sql
+
+²âÊÔ³õÊ¼»¯£º
+mysql -uroot -p123456 < G:\InnovationProject\Source\conf\test_init.sql

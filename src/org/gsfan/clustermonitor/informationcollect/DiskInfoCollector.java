@@ -51,9 +51,7 @@ public class DiskInfoCollector {
 				usedSize += Long.parseLong(temp[startFlag++]);
 				availableSize += Long.parseLong(temp[startFlag]);
 			}
-//			result[0] = totalSize;
-//			result[1] = usedSize;
-//			result[2] = availableSize;
+
 			diskMessage.setTotalSize(totalSize);
 			diskMessage.setUsedSize(usedSize);
 			diskMessage.setAvailableSize(availableSize);
