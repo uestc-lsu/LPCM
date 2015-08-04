@@ -55,12 +55,4 @@ public class MemoryMessage extends Message{
 				+Float.toString(this.memoryUsage);
 		return str;
 	}
-	
-//	public static void main(String[] args) {
-//		Message msg = new MemoryMessage(20, 20, 20.0f);
-//		System.out.println(msg.toString());
-////		Message msg = new CpuMessage(20.0f);
-////		System.out.println(msg.getLabel());
-//	}
-
 }

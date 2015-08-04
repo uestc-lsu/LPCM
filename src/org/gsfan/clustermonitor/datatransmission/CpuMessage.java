@@ -4,10 +4,10 @@ public class CpuMessage extends Message {
 	
 	private float cpuUsage = 0f;
 	public CpuMessage() {
-		super("CpuMsg");//设置标签为MemoryMsg
+		super("CpuMsg");
 	}
 	public CpuMessage(float cpuUsage) {
-		super("CpuMsg");//设置标签为MemoryMsg
+		super("CpuMsg");
 		this.cpuUsage = cpuUsage;
 	}
 	
@@ -31,8 +31,4 @@ public class CpuMessage extends Message {
 		String str = this.label + Message.DELIMITER + Float.toString(cpuUsage);
 		return str;
 	}
-//	public static void main(String[] args) {
-//		
-//	}
-
 }

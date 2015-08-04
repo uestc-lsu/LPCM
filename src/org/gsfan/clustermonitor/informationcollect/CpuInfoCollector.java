@@ -8,10 +8,6 @@ import java.io.StringWriter;
 
 import org.gsfan.clustermonitor.datatransmission.CpuMessage;
 
-
-/**
- * 采集CPU使用率
- */
 public class CpuInfoCollector{
 	
 	private static CpuInfoCollector instance = new CpuInfoCollector();
@@ -27,23 +23,18 @@ public class CpuInfoCollector{
 		return instance;
 	}
 	
-	/**
-	 * Purpose:采集CPU使用率
-	 * @param args
-	 */
-//	public float getCpuUsage() {
 	public void collectCpuUsage() {
 		float cpuUsage = 0;
 		Process pro1,pro2;
 		Runtime runtime = Runtime.getRuntime();
 		try {
 			String command = "cat /proc/stat";
-			//第一次采集CPU时间
+			
 //			long startTime = System.currentTimeMillis();
 			pro1 = runtime.exec(command);
 			BufferedReader in1 = new BufferedReader(new InputStreamReader(pro1.getInputStream()));
 			String line = null;
-			long idleCpuTime1 = 0, totalCpuTime1 = 0;	//分别为系统启动后空闲的CPU时间和总的CPU时间
+			long idleCpuTime1 = 0, totalCpuTime1 = 0;	//锟街憋拷为系统锟斤拷锟斤拷锟斤拷锟斤拷械锟紺PU时锟斤拷锟斤拷艿锟紺PU时锟斤拷
 			while((line=in1.readLine()) != null){	
 				if(line.startsWith("cpu")){
 					line = line.trim();
@@ -66,18 +57,15 @@ public class CpuInfoCollector{
 			} catch (InterruptedException e) {
 				StringWriter sw = new StringWriter();
 				e.printStackTrace(new PrintWriter(sw));
-//				log.error("CpuUsage休眠时发生InterruptedException. " + e.getMessage());
-//				log.error(sw.toString());
+
 			}
-			//第二次采集CPU时间
-//			long endTime = System.currentTimeMillis();
+			
 			pro2 = runtime.exec(command);
 			BufferedReader in2 = new BufferedReader(new InputStreamReader(pro2.getInputStream()));
-			long idleCpuTime2 = 0, totalCpuTime2 = 0;	//分别为系统启动后空闲的CPU时间和总的CPU时间
+			long idleCpuTime2 = 0, totalCpuTime2 = 0;
 			while((line=in2.readLine()) != null){	
 				if(line.startsWith("cpu")){
 					line = line.trim();
-//					log.info(line);
 					String[] temp = line.split("\\s+"); 
 					idleCpuTime2 = Long.parseLong(temp[4]);
 					for(String s : temp){
@@ -99,13 +87,8 @@ public class CpuInfoCollector{
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw));
 		}	
-//		return cpuUsage;
 	}
 
-	/**
-	 * @param args
-	 * @throws InterruptedException 
-	 */
 	public static void main(String[] args) throws InterruptedException {
 		CpuInfoCollector collector = CpuInfoCollector.getInstance();
 		while(true){

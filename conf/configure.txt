@@ -1,1 +1,17 @@
-mysqllocation:port = 192.77.108.249:3307
+#***********************database configuration***********************
+[database]
+dblocation:port = 192.77.108.249:3307
+password = 0620631FGS
+username = gsfan
+#********************end of database configuration*******************
+
+#***********************storage configuration************************
+[storage]
+storagemode = file:/home/gsfan/src/ClusterMonitor/infostore
+storagetimeinterval = 20s 
+cpuinfofilename = cpuinformation
+memoryinfofilename = memoryinformation
+diskinfofilename = diskinformation
+networkinfofilename = networkinformation
+#storagemode = database #do not support database storage at present
+#********************end of storage configuration********************

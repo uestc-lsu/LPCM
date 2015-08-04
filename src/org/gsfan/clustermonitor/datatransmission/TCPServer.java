@@ -4,21 +4,15 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import org.gsfan.clustermonitor.informationcollect.*;
+import org.gsfan.clustermonitor.informationcollect.CpuInfoCollector;
+import org.gsfan.clustermonitor.informationcollect.DiskInfoCollector;
 
 public class TCPServer{
-	
-//	private int listenPort = 0;
 	
 	private ServerSocket server = null;
 	private Socket client = null ;
 	
-//	private InputStream input = null;
-//	private BufferedReader reader = null;
-//	private DataInputStream dataInput = null;
-	
 	public TCPServer(int port)  {
-//		this.listenPort = port;
 		try {
 			server = new ServerSocket(port);
 		} catch (IOException e) {
@@ -32,9 +26,6 @@ public class TCPServer{
 	}
 	
 	public void disconnection() throws IOException{
-//		reader.close();
-//		input.close();
-//		dataInput.close();
 		client.close();
 		server.close();
 	}
@@ -71,6 +62,5 @@ public class TCPServer{
 			
 			client.close();
 		}
-//		ser.disconnection();
 	}
 }

@@ -3,7 +3,12 @@ package org.gsfan.clustermonitor.datatransmission;
 import java.io.IOException;
 import java.net.Socket;
 
-import org.gsfan.clustermonitor.informationcollect.*;
+import org.gsfan.clustermonitor.datastorage.StorageInformation;
+import org.gsfan.clustermonitor.dbconnector.ConfigureFileReader;
+import org.gsfan.clustermonitor.informationcollect.CpuInfoCollector;
+import org.gsfan.clustermonitor.informationcollect.DiskInfoCollector;
+import org.gsfan.clustermonitor.informationcollect.MemoryInfoCollector;
+import org.gsfan.clustermonitor.informationcollect.NetworkInfoCollector;
 
 
 public class DataTransmission {
@@ -132,10 +137,17 @@ public class DataTransmission {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		server.disconnection();
 	}
 	public static void main(String[] args) {
 		DataTransmission transmit = new DataTransmission();
+		
+		ConfigureFileReader reader = ConfigureFileReader.getInstance();
+		@SuppressWarnings("static-access")
+		String time = reader.getConfInfoTable().get("storagetimeinterval");
+		int loc = time.indexOf('s');
+		int interval = new Integer(time.substring(0, loc-1));
+		StorageInformation storage = new StorageInformation(interval*1000);
+		storage.start();	//每隔20s向文件中写一次信息
 		while(true){
 			transmit.startTransmit();
 			new DataTransmissionThread(transmit).run();

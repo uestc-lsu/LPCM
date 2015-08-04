@@ -7,21 +7,15 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-import org.gsfan.clustermonitor.mainfram.WarnMsgDialog;
-
 public class TCPClient {
-//	private String serAddr = null;
-//	private int conPort = 0;
+
 	private Socket client = null;
 	private InputStream input = null;
 	private OutputStream output = null;
 	
 	public TCPClient(String addr, int port) throws Exception{
-//		conPort = port;
-//		serAddr = addr ;
 		SocketAddress socAddr = new InetSocketAddress(addr, port);
 		try {
-//			client = new Socket(serAddr,conPort);
 			client = new Socket();
 			client.connect(socAddr, 5);
 			try {
@@ -32,11 +26,8 @@ public class TCPClient {
 			}
 		}  catch (IOException e) {
 			client.close();
-//			client = null;
 			System.out.println("TCPClient "+e.getMessage());
-//			WarnMsgDialog msgDialog = new WarnMsgDialog(e.getMessage()+": connect to " + addr + "error!");
-//			Thread thread = new Thread(msgDialog);
-//			thread.start();
+
 		}
 	}
 	

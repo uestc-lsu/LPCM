@@ -2,9 +2,8 @@ package org.gsfan.clustermonitor.datatransmission;
 
 public abstract class Message {
 	public static final String DELIMITER = " ";
-//	protected String delimiter = " ";
 	protected String label = null;
-//	public Message(){}
+
 	public Message(String label){
 		this.label = label;
 	}

@@ -4,11 +4,11 @@ public class NetworkMessage extends Message{
 	private float curRate = 0.0f;
 	
 	public NetworkMessage(){
-		super("NetworkMsg");//设置标签为MemoryMsg
+		super("NetworkMsg");
 	}
 	
 	public NetworkMessage(float curRate){
-		super("NetworkMsg");//设置标签为MemoryMsg
+		super("NetworkMsg");
 		this.curRate = curRate;
 	}
 	
